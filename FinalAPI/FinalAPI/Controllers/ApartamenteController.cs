@@ -24,6 +24,12 @@ namespace FinalAPI.Controllers
             return Ok(user);
         }
 
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> Delete([FromRoute] long id)
+        {
+            return Ok( await _service.DeleteAsync(id));
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {

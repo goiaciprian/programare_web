@@ -1,0 +1,28 @@
+<div class="container">
+  <form [formGroup]="formGroup">
+    <div *ngFor="let field of formFields">
+      <ng-template *ngIf="field.isSelect; else elseBlock">
+        <mat-form-field appearance="outline">
+          <mat-label>{{ field.label }}</mat-label>
+          <mat-select formControlName="{{ field.propertyName }}">
+            <mat-option *ngFor="let elem of field.options" [value]="elem.value">
+              {{ elem.text }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </ng-template>
+      <ng-template #elseBlock>
+        <mat-form-field appearance="outline">
+          <mat-label> {{ field.label }}</mat-label>
+          <input
+            type="{{ field.type }}"
+            matInput
+            formControlName="{{ field.propertyName }}"
+          />
+        </mat-form-field>
+      </ng-template>
+    </div>
+    <button mat-raised-button (click)="printValues()">Adauga</button>
+    <button mat-raised-button (click)="deleteValue()">Delete</button>
+  </form>
+</div>

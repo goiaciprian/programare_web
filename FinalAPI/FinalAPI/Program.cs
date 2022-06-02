@@ -22,6 +22,16 @@ builder.Services.AddTransient<IApartamenteService, ApartamenteService>();
 builder.Services.AddTransient<IApartamenteUserRepo, ApartamenteUserRepository>();
 builder.Services.AddTransient<IApartamenteUserService, ApartamenteUserService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("CorsPolicy", builder =>
+    {
+        builder.AllowAnyOrigin();
+        builder.AllowAnyHeader();
+        builder.AllowAnyMethod();
+    });
+});
+
 // Add services to the container.
 
 builder.Services.AddControllers();
@@ -30,6 +40,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
+
+app.UseCors("CorsPolicy");
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

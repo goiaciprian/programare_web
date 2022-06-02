@@ -1,0 +1,22 @@
+<table mat-table [dataSource]="dataSource$ | async" class="mat-elevation-z8">
+  <ng-container
+    matColumnDef="{{ item.propertyName }}"
+    *ngFor="let item of columnsDefinition"
+  >
+    <th mat-header-cell *matHeaderCellDef>{{ item.header }}</th>
+    <td mat-cell *matCellDef="let element">
+      {{
+        item.shouldRender === "function"
+          ? item.render(element)
+          : element[item.propertySelector]
+      }}
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="definedColumns"></tr>
+  <tr
+    mat-row
+    *matRowDef="let row; columns: definedColumns"
+    (click)="emitSelectedRow(row)"
+  ></tr>
+</table>
