@@ -1,0 +1,15 @@
+<div class="container" fxLayout="row" fxLayoutGap="20">
+  <div class="grid-container">
+    <app-grid
+      [columnsDefinition]="dysplayedColumns"
+      [dataSource$]="apartamente$"
+      (rowClicked)="setSelectedApartament($event)"
+      fxFlexFill
+    ></app-grid>
+  </div>
+
+  <app-form
+    [formFields]="formFields"
+    [selectedValue]="selectedApartament$ | async"
+  ></app-form>
+</div>

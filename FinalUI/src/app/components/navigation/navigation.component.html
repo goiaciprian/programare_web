@@ -1,0 +1,21 @@
+<mat-toolbar style="height: fit-content">
+  <span>Proiect programare web</span>
+  <div class="links">
+    <a mat-button routerLink="/">Home</a>
+    <a mat-button routerLink="/users">Users</a>
+  </div>
+  <span class="filler"></span>
+  <div>
+    <mat-form-field appearance="outline">
+      <mat-label>User logat</mat-label>
+      <mat-select
+        [value]="selectedUser$ | async"
+        (selectionChange)="handleChange($event)"
+      >
+        <mat-option *ngFor="let user of users$ | async" [value]="user.iD_User">
+          {{ user.firstName }} {{ user.lastName }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</mat-toolbar>

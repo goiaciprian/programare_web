@@ -1,4 +1,4 @@
-version: '3.9'
+version: "3.9"
 services:
   final_pweb_api:
     image: final_pweb_api
@@ -7,6 +7,16 @@ services:
       - sql_server
     ports:
       - 8086:80
+    networks:
+      - proiect-pweb
+
+  final_pweb_ui:
+    image: final_pweb_ui
+    container_name: final_pweb_ui
+    depends_on:
+      - final_pweb_api
+    ports:
+      - 4210:80
     networks:
       - proiect-pweb
 
