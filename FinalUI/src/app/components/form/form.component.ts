@@ -8,7 +8,11 @@ import {
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { BehaviorSubject, Observable, of } from 'rxjs';
-import { CreateApartament, DeleteApartament } from 'src/app/+state';
+import {
+  CreateApartament,
+  DeleteApartament,
+  getSelecteUser,
+} from 'src/app/+state';
 import { Apartament } from 'src/app/models/apartament.model';
 import { ApartamentDTO } from 'src/app/models/apartamentdto.model';
 import { ApartamenteService } from 'src/app/services/apartamente.service';
@@ -57,20 +61,27 @@ export class FormComponent implements OnInit, OnChanges {
   printValues() {
     if (!this.formGroup.valid) return;
 
-    const apartament = {
-      id_proprietar: 1,
-      adresa: '',
-      chirie: 0,
-    };
-    apartament.adresa = this.formGroup.value['adresa'];
-    apartament.chirie = this.formGroup.value['chirie'];
+    this._store.select(getSelecteUser).subscribe((userId) => {
+      if (userId === undefined) {
+        alert('You are not logged in.');
+        return;
+      }
 
-    this._store.dispatch(
-      CreateApartament({
-        apartament: apartament,
-      })
-    );
-    this.reset();
+      const apartament = {
+        id_proprietar: userId,
+        adresa: '',
+        chirie: 0,
+      };
+      apartament.adresa = this.formGroup.value['adresa'];
+      apartament.chirie = this.formGroup.value['chirie'];
+
+      this._store.dispatch(
+        CreateApartament({
+          apartament: apartament,
+        })
+      );
+      this.reset();
+    });
   }
 
   deleteValue() {
