@@ -42,8 +42,8 @@ export const DeleteApartament = createAction(
 
 export const ApartamentDoNothing = createAction('[Apartaments] Do nothing');
 
-export const UpdateApartaments = createAction(
-  '[Apartaments] Create apartament',
+export const AddApartamentToState = createAction(
+  '[Apartaments] Add apartament to state',
   props<{ apartament: Apartament }>()
 );
 

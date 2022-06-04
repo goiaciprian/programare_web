@@ -25,7 +25,7 @@ const selectedUserReducer = createReducer(
 const apartamentsReducer = createReducer(
   initialState.apartamente,
   on(CoreActions.LoadApartaments, (_, { apartamente }) => apartamente),
-  on(CoreActions.UpdateApartaments, (state, { apartament }) => [
+  on(CoreActions.AddApartamentToState, (state, { apartament }) => [
     ...state,
     apartament,
   ]),
