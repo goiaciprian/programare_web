@@ -22,7 +22,14 @@
         </mat-form-field>
       </ng-template>
     </div>
-    <button mat-raised-button (click)="printValues()">Adauga</button>
-    <button mat-raised-button (click)="deleteValue()">Delete</button>
+    <div style="display: flex">
+      <button mat-raised-button (click)="printValues()">Adauga</button>
+      <button [disabled]="!hasValue" mat-raised-button (click)="deleteValue()">
+        Delete
+      </button>
+      <button [disabled]="!hasValue" mat-raised-button (click)="reset()">
+        Clear
+      </button>
+    </div>
   </form>
 </div>

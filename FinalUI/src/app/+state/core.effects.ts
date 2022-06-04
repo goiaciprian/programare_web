@@ -46,13 +46,13 @@ export class CoreEffects {
     )
   );
 
-  insertApartament$ = createEffect(() =>
-    this.action$.pipe(
+  insertApartament$ = createEffect(() => {
+    return this.action$.pipe(
       ofType(CoreActions.CreateApartament),
       switchMap((action) =>
         this._service.createApartament(action.apartament).pipe(
           tap((elem) => console.log(elem)),
-          map((app) => CoreActions.UpdateApartaments({ apartament: app })),
+          map((app) => CoreActions.AddApartamentToState({ apartament: app })),
           catchError((err) => {
             const error = new Error();
             error.message = err.message;
@@ -61,8 +61,8 @@ export class CoreEffects {
           })
         )
       )
-    )
-  );
+    );
+  });
 
   deleteApartament$ = createEffect(() =>
     this.action$.pipe(
